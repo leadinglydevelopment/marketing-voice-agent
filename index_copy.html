@@ -1,137 +1,157 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>AI Call Assistant</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background: transparent;
-      }
 
-      .container {
-        background: transparent;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>AI Call Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: transparent;
+    }
 
-      .circle-wrapper {
-        width: 250px;
-        height: 250px;
-        position: relative;
-      }
+    .container {
+      background: transparent;
+    }
 
-      iframe {
-        width: 250px;
-        height: 250px;
-        background-color: transparent;
-        border: none;
-      }
+    .circle-wrapper {
+      width: 250px;
+      height: 250px;
+      position: relative;
+    }
 
-      #ai-call-container {
-        position: absolute;
-        top: 49%;
-        left: 49%;
-        transform: translate(-50%, -50%);
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-family: "Inter", sans-serif;
-      }
+    iframe {
+      width: 250px;
+      height: 250px;
+      background-color: transparent;
+      border: none;
+    }
 
-      #ai-call-button {
-        background-color: white;
-        color: black;
-        padding: 10px;
-        border-radius: 90px;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-      }
+    #ai-call-container {
+      position: absolute;
+      top: 49%;
+      left: 49%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: "Inter", sans-serif;
+    }
 
-      #ai-call-button:hover {
-        background-color: #f0f0f0;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
-      }
+    #ai-call-button {
+      background-color: white;
+      color: black;
+      padding: 10px;
+      border-radius: 90px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
 
-      #timer-display {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 50%;
-        transform: translate(-50%, 0);
-        font-size: 16px;
-        font-weight: bold;
-        color: #5862ff;
-        background-color: white;
-        padding: 5px 10px;
-        border-radius: 10px;
-        border: 2px solid #5862ff;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-        width: 70px;
-        text-align: center;
-      }
+    #ai-call-button:hover {
+      background-color: #f0f0f0;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    }
 
-      /* HTML: <div class="loader"></div> */
-      .loader {
-        width: 28px;
-        aspect-ratio: 4;
-        background: radial-gradient(circle closest-side, #000 90%, #0000) 0 / calc(100% / 3) 100% space;
-        clip-path: inset(0 100% 0 0);
-        animation: l1 1s steps(4) infinite;
-        height: 28px;
-      }
-      @keyframes l1 {
-        to {
-          clip-path: inset(0 -34% 0 0);
-        }
-      }
-    </style>
-  </head>
+    #timer-display {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      font-size: 16px;
+      font-weight: bold;
+      color: #5862ff;
+      background-color: white;
+      padding: 5px 10px;
+      border-radius: 10px;
+      border: 2px solid #5862ff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+      width: 70px;
+      text-align: center;
+    }
 
-  <body>
-    <div class="container">
-      <div class="circle-wrapper">
-        <div class="circle-ai w-embed w-iframe">
-          <iframe
-            allowtransparency="true"
-            src="https://app.endlesstools.io/embed/f0c3bf79-dc8e-4f87-b572-35115135f06b"
-            title="Endless Tools Editor"
-            allow="clipboard-write; encrypted-media; gyroscope; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-        </div>
+    /* HTML: <div class="loader"></div> */
+    .loader {
+      width: 28px;
+      aspect-ratio: 4;
+      background: radial-gradient(circle closest-side, #000 90%, #0000) 0 / calc(100% / 3) 100% space;
+      clip-path: inset(0 100% 0 0);
+      animation: l1 1s steps(4) infinite;
+      height: 28px;
+    }
 
-        <!-- Call UI displayed by default -->
-        <div id="ai-call-container">
-          <span id="timer-display"></span>
-          <button id="ai-call-button">
-            <svg style="opacity: 1" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none" class="mic-icon">
-              <path
-                d="M19 10V12C19 15.866 15.866 19 12 19M5 10V12C5 15.866 8.13401 19 12 19M12 19V22M8 22H16M12 15C10.3431 15 9 13.6569 9 12V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V12C15 13.6569 13.6569 15 12 15Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </svg>
-          </button>
-        </div>
+    @keyframes l1 {
+      to {
+        clip-path: inset(0 -34% 0 0);
+      }
+    }
+
+    .toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #3F49F0;
+      color: #fff;
+      text-align: center;
+      border-radius: 10px;
+      padding: 16px;
+      position: fixed;
+      z-index: 999;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.5s, bottom 0.5s;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="toast" class="toast">You have reached the limit of voice calls for today.</div>
+  <div class="container">
+    <div class="circle-wrapper">
+      <div class="circle-ai w-embed w-iframe">
+        <iframe allowtransparency="true" src="https://app.endlesstools.io/embed/f0c3bf79-dc8e-4f87-b572-35115135f06b"
+          title="Endless Tools Editor" allow="clipboard-write; encrypted-media; gyroscope; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <!-- Call UI displayed by default -->
+      <div id="ai-call-container">
+        <span id="timer-display"></span>
+        <button id="ai-call-button">
+          <svg style="opacity: 1" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24"
+            fill="none" class="mic-icon">
+            <path
+              d="M19 10V12C19 15.866 15.866 19 12 19M5 10V12C5 15.866 8.13401 19 12 19M12 19V22M8 22H16M12 15C10.3431 15 9 13.6569 9 12V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V12C15 13.6569 13.6569 15 12 15Z"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
       </div>
     </div>
-    <script>
-      const CALL_HANGUP_SVG = `<svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5.47542 12.8632C4.44449 11.2623 3.67643 9.54134 3.17124 7.76144C3.01103 7.19699 2.93093 6.91477 2.9297 6.50182C2.92833 6.0436 3.08969 5.42311 3.31412 5.0236C3.51636 4.66357 3.78117 4.39876 4.3108 3.86913L4.46843 3.7115C4.99987 3.18006 5.2656 2.91433 5.55098 2.76999C6.11854 2.48292 6.7888 2.48292 7.35636 2.76999C7.64174 2.91433 7.90747 3.18006 8.43891 3.7115L8.63378 3.90637C8.98338 4.25597 9.15819 4.43078 9.27247 4.60656C9.70347 5.26945 9.70347 6.12403 9.27247 6.78692C9.15819 6.9627 8.98338 7.1375 8.63378 7.4871C8.51947 7.60142 8.46231 7.65857 8.41447 7.72539C8.24446 7.96281 8.18576 8.30707 8.26748 8.58743C8.29048 8.66632 8.32041 8.72867 8.38028 8.85337C8.50111 9.10503 8.62956 9.35395 8.76563 9.59979M11.1817 12.8181L11.2266 12.8632C12.4282 14.0648 13.7869 15.0136 15.2365 15.7096C15.3612 15.7694 15.4235 15.7994 15.5024 15.8224C15.7828 15.9041 16.127 15.8454 16.3644 15.6754C16.4313 15.6275 16.4884 15.5704 16.6027 15.4561C16.9523 15.1064 17.1271 14.9316 17.3029 14.8174C17.9658 14.3864 18.8204 14.3864 19.4833 14.8174C19.6591 14.9316 19.8339 15.1064 20.1835 15.4561L20.3783 15.6509C20.9098 16.1824 21.1755 16.4481 21.3198 16.7335C21.6069 17.301 21.6069 17.9713 21.3198 18.5389C21.1755 18.8242 20.9098 19.09 20.3783 19.6214L20.2207 19.779C19.6911 20.3087 19.4263 20.5735 19.0662 20.7757C18.6667 21.0001 18.0462 21.1615 17.588 21.1601C17.1751 21.1589 16.8928 21.0788 16.3284 20.9186C13.295 20.0576 10.4326 18.4332 8.04466 16.0452L7.99976 16.0001M20.9996 3.00012L2.99961 21.0001" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`;
+  </div>
+  <script>
+    const CALL_HANGUP_SVG = `<svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5.47542 12.8632C4.44449 11.2623 3.67643 9.54134 3.17124 7.76144C3.01103 7.19699 2.93093 6.91477 2.9297 6.50182C2.92833 6.0436 3.08969 5.42311 3.31412 5.0236C3.51636 4.66357 3.78117 4.39876 4.3108 3.86913L4.46843 3.7115C4.99987 3.18006 5.2656 2.91433 5.55098 2.76999C6.11854 2.48292 6.7888 2.48292 7.35636 2.76999C7.64174 2.91433 7.90747 3.18006 8.43891 3.7115L8.63378 3.90637C8.98338 4.25597 9.15819 4.43078 9.27247 4.60656C9.70347 5.26945 9.70347 6.12403 9.27247 6.78692C9.15819 6.9627 8.98338 7.1375 8.63378 7.4871C8.51947 7.60142 8.46231 7.65857 8.41447 7.72539C8.24446 7.96281 8.18576 8.30707 8.26748 8.58743C8.29048 8.66632 8.32041 8.72867 8.38028 8.85337C8.50111 9.10503 8.62956 9.35395 8.76563 9.59979M11.1817 12.8181L11.2266 12.8632C12.4282 14.0648 13.7869 15.0136 15.2365 15.7096C15.3612 15.7694 15.4235 15.7994 15.5024 15.8224C15.7828 15.9041 16.127 15.8454 16.3644 15.6754C16.4313 15.6275 16.4884 15.5704 16.6027 15.4561C16.9523 15.1064 17.1271 14.9316 17.3029 14.8174C17.9658 14.3864 18.8204 14.3864 19.4833 14.8174C19.6591 14.9316 19.8339 15.1064 20.1835 15.4561L20.3783 15.6509C20.9098 16.1824 21.1755 16.4481 21.3198 16.7335C21.6069 17.301 21.6069 17.9713 21.3198 18.5389C21.1755 18.8242 20.9098 19.09 20.3783 19.6214L20.2207 19.779C19.6911 20.3087 19.4263 20.5735 19.0662 20.7757C18.6667 21.0001 18.0462 21.1615 17.588 21.1601C17.1751 21.1589 16.8928 21.0788 16.3284 20.9186C13.295 20.0576 10.4326 18.4332 8.04466 16.0452L7.99976 16.0001M20.9996 3.00012L2.99961 21.0001" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`;
 
-      const MICK_SVG = `<svg style="opacity: 1" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none" class="mic-icon">
+    const MICK_SVG = `<svg style="opacity: 1" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none" class="mic-icon">
         <path
           d="M19 10V12C19 15.866 15.866 19 12 19M5 10V12C5 15.866 8.13401 19 12 19M12 19V22M8 22H16M12 15C10.3431 15 9 13.6569 9 12V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V12C15 13.6569 13.6569 15 12 15Z"
           stroke="currentColor"
@@ -141,107 +161,115 @@
         ></path>
       </svg>`;
 
-      document.addEventListener("DOMContentLoaded", async function () {
-        const AGENT_ID = "dTjboidIcA4BKsonR46D";
-        const callButton = document.getElementById("ai-call-button");
-        const timerDisplay = document.getElementById("timer-display");
+    document.addEventListener("DOMContentLoaded", async function () {
+      const AGENT_ID = "dTjboidIcA4BKsonR46D";
+      const callButton = document.getElementById("ai-call-button");
+      const timerDisplay = document.getElementById("timer-display");
 
-        let client, conversation, timerInterval;
-        let timeLeft = 60;
-        let isConversationActive = false;
+      let client, conversation, timerInterval;
+      let timeLeft = 60;
+      let isConversationActive = false;
 
-        const ElevenLabs = await import("https://cdn.jsdelivr.net/npm/@11labs/client@0.0.7/+esm");
-        if (!ElevenLabs) {
-          console.error("ElevenLabsClient not loaded.");
+      const ElevenLabs = await import("https://cdn.jsdelivr.net/npm/@11labs/client@0.0.7/+esm");
+      if (!ElevenLabs) {
+        console.error("ElevenLabsClient not loaded.");
+        return;
+      }
+      client = ElevenLabs;
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.className = "toast show";
+        setTimeout(() => {
+          toast.className = "toast";
+        }, 3000);
+      }
+
+      async function canUseVoiceCall() {
+        const res = await fetch("https://leadingly-testapp-backend-staging-np6z.onrender.com/marketing-site-voice-agent-usage", {
+          method: "POST",
+        });
+
+        const data = await res.json();
+
+        if (data.allowed) {
+          return true;
+        } else if (data.allowed === false) {
+          callButton.innerHTML = MICK_SVG;
+          callButton.style.pointerEvents = "auto";
+          callButton.disabled = false;
+          showToast("You have reached the limit of voice calls for today.");
+          return false;
+        } else {
+          return false;
+        }
+      }
+
+      async function startConversation() {
+        try {
+          callButton.style.pointerEvents = "none";
+          callButton.disabled = true;
+          const loader = document.createElement("div");
+          loader.className = "loader";
+          callButton.innerHTML = loader.outerHTML;
+          const canUse = await canUseVoiceCall();
+          if (!canUse) return;
+          isConversationActive = true;
+          conversation = await client.Conversation.startSession({
+            agentId: AGENT_ID,
+          });
+          if (!conversation) throw new Error("Failed to start conversation");
+
+          callButton.style.pointerEvents = "auto";
+          callButton.disabled = false;
+          callButton.innerHTML = CALL_HANGUP_SVG;
+
+          timerDisplay.style.display = "inline";
+          timeLeft = 60;
+          updateTimer();
+          timerInterval = setInterval(updateTimer, 1000);
+        } catch (err) {
+          console.log(err);
+          callButton.innerHTML = MICK_SVG;
+        }
+      }
+
+      async function endConversation() {
+        try {
+          if (conversation) await conversation.endSession();
+        } catch (err) {
+          console.error(err);
+        } finally {
+          conversation = null;
+          callButton.innerHTML = MICK_SVG;
+          timerDisplay.style.display = "none";
+          clearInterval(timerInterval);
+          isConversationActive = false;
+        }
+      }
+
+      function updateTimer() {
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          endConversation();
           return;
         }
-        client = ElevenLabs;
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.innerHTML = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        timeLeft--;
+      }
 
-        async function canUseVoiceCall() {
-          const res = await fetch("https://leadingly-testapp-backend-staging-np6z.onrender.com/marketing-site-voice-agent-usage", {
-            method: "POST",
-          });
-
-          const data = await res.json();
-
-          if (data.allowed) {
-            return true;
-          } else if (data.allowed === false) {
-            callButton.innerHTML = MICK_SVG;
-            callButton.style.pointerEvents = "auto";
-            callButton.disabled = false;
-            setTimeout(() => {
-              alert("You have reached the limit of voice calls for today.");
-            }, 500);
-            return false;
-          } else {
-            return false;
-          }
+      callButton.addEventListener("click", () => {
+        if (isConversationActive) {
+          endConversation();
+        } else {
+          startConversation();
         }
-
-        async function startConversation() {
-          try {
-            callButton.style.pointerEvents = "none";
-            callButton.disabled = true;
-            const loader = document.createElement("div");
-            loader.className = "loader";
-            callButton.innerHTML = loader.outerHTML;
-            // const canUse = await canUseVoiceCall();
-            // if (!canUse) return;
-            isConversationActive = true;
-            conversation = await client.Conversation.startSession({
-              agentId: AGENT_ID,
-            });
-            if (!conversation) throw new Error("Failed to start conversation");
-
-            callButton.style.pointerEvents = "auto";
-            callButton.disabled = false;
-            callButton.innerHTML = CALL_HANGUP_SVG;
-
-            timerDisplay.style.display = "inline";
-            timeLeft = 60;
-            updateTimer();
-            timerInterval = setInterval(updateTimer, 1000);
-          } catch (err) {
-            console.log(err);
-            callButton.innerHTML = MICK_SVG;
-          }
-        }
-
-        async function endConversation() {
-          try {
-            if (conversation) await conversation.endSession();
-          } catch (err) {
-            console.error(err);
-          } finally {
-            conversation = null;
-            callButton.innerHTML = MICK_SVG;
-            timerDisplay.style.display = "none";
-            clearInterval(timerInterval);
-            isConversationActive = false;
-          }
-        }
-
-        function updateTimer() {
-          if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            endConversation();
-            return;
-          }
-          const minutes = Math.floor(timeLeft / 60);
-          const seconds = timeLeft % 60;
-          timerDisplay.innerHTML = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-          timeLeft--;
-        }
-
-        callButton.addEventListener("click", () => {
-          if (isConversationActive) {
-            endConversation();
-          } else {
-            startConversation();
-          }
-        });
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
