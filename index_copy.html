@@ -171,7 +171,7 @@
       const timerDisplay = document.getElementById("timer-display");
 
       let client, conversation, timerInterval;
-      let timeLeft = 60;
+      let timeLeft = 120;
       let isConversationActive = false;
 
       const ElevenLabs = await import("https://cdn.jsdelivr.net/npm/@11labs/client@0.0.7/+esm");
@@ -233,7 +233,7 @@
           callButton.innerHTML = CALL_HANGUP_SVG;
 
           timerDisplay.style.display = "inline";
-          timeLeft = 60;
+          timeLeft = 120;
           updateTimer();
           timerInterval = setInterval(updateTimer, 1000);
         } catch (err) {
