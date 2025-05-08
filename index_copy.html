@@ -206,6 +206,7 @@
             setTimeout(() => {
               alert("You have reached the limit of voice calls for today.");
             }, 500);
+            return false;
           }
           return true;
         } catch (err) {
