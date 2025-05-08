@@ -190,26 +190,26 @@
         }, 3000);
       }
 
-      async function canUseVoiceCall() {
-        const res = await fetch("https://leadingly-testapp-backend-staging-np6z.onrender.com/marketing-site-voice-agent-usage", {
-          method: "POST",
-        });
+     async function checkVoiceCallUsage() {
+        try {
+          const res = await fetch("https://leadingly-testapp-backend-staging-13go.onrender.com/marketing-site-voice-agent-usage", {
+            method: "POST",
+          });
 
-        const data = await res.json();
+          const data = await res.json();
 
-        if (data.allowed) {
-          return true;
-        } else if (data.allowed === false) {
-          callButton.innerHTML = MICK_SVG;
-          callButton.style.pointerEvents = "auto";
-          callButton.disabled = false;
-          // showToast("You have reached the limit of voice calls for today.");
-          setTimeout(() => {
+          if (data.allowed === false) {
+            showToast("You have reached the limit of voice calls for today.");
+            setTimeout(() => {
               alert("You have reached the limit of voice calls for today.");
             }, 500);
-          return false;
-        } else {
-          return false;
+            return false;
+          }
+          return true;
+        } catch (err) {
+          console.warn("Failed to check voice call usage limits. Proceeding anyway.", err);
+          // If the API call fails, we'll proceed with the voice call anyway
+          return true;
         }
       }
 
@@ -239,6 +239,8 @@
         } catch (err) {
           console.log(err);
           callButton.innerHTML = MICK_SVG;
+          callButton.style.pointerEvents = "auto";
+          callButton.disabled = false;
         }
       }
 
