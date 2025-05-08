@@ -220,8 +220,8 @@
           const loader = document.createElement("div");
           loader.className = "loader";
           callButton.innerHTML = loader.outerHTML;
-          // const canUse = await canUseVoiceCall();
-          // if (!canUse) return;
+          const canUse = await canUseVoiceCall();
+          if (!canUse) return;
           isConversationActive = true;
           conversation = await client.Conversation.startSession({
             agentId: AGENT_ID,
