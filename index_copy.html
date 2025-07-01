@@ -166,7 +166,8 @@
       </svg>`;
 
     document.addEventListener("DOMContentLoaded", async function () {
-      const AGENT_ID = "KKpyXpcCDUP5I3nZiHW8";
+      // const AGENT_ID = "KKpyXpcCDUP5I3nZiHW8";
+      const AGENT_ID = "5zUW7ZWM462lUzSpY5Yg";
       const callButton = document.getElementById("ai-call-button");
       const timerDisplay = document.getElementById("timer-display");
 
@@ -192,7 +193,7 @@
 
      async function canUseVoiceCall() {
         try {
-          const res = await fetch("https://jb-leadingly-testapp-backend-staging.onrender.com/marketing-site-voice-agent-usage", {
+          const res = await fetch("https://https://api.b2brocket.ai/marketing-site-voice-agent-usage", {
             method: "POST",
           });
 
