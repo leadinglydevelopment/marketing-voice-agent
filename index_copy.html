@@ -203,10 +203,10 @@
             callButton.innerHTML = MICK_SVG;
             callButton.style.pointerEvents = "auto";
             callButton.disabled = false;
-            // showToast("You have reached the limit of voice calls for today.");
-            setTimeout(() => {
-              alert("You have reached the limit of voice calls for today.");
-            }, 500);
+            showToast("You have reached the limit of voice calls for today.");
+            // setTimeout(() => {
+            //   alert("You have reached the limit of voice calls for today.");
+            // }, 500);
             return false;
           }
           return true;
