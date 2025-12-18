@@ -15,34 +15,50 @@
 
     .container {
       background: transparent;
+      /* Make container a reference for absolute positioning */
     }
 
     /* Toast inside container */
+    /* Tooltip-style Toast */
     .toast {
       visibility: hidden;
-      min-width: 200px;
-      max-width: 90%;
-      box-sizing: border-box;
+      width: max-content;
+      max-width: 200px;
       background-color: #3F49F0;
       color: #fff;
       text-align: center;
-      border-radius: 10px;
-      padding: 12px 16px;
+      border-radius: 8px;
+      padding: 8px 12px;
       position: absolute;
-      z-index: 99;
+      z-index: 100;
       left: 50%;
-      bottom: 20px;
+      bottom: 100%;
+      margin-bottom: 15px;
       transform: translateX(-50%);
-      font-size: 14px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      font-size: 12px;
+      line-height: 1.4;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       opacity: 0;
-      transition: opacity 0.4s ease, bottom 0.4s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    /* Tooltip Arrow */
+    .toast::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border-width: 6px;
+      border-style: solid;
+      border-color: #3F49F0 transparent transparent transparent;
     }
 
     .toast.show {
       visibility: visible;
       opacity: 1;
-      bottom: 40px;
+      transform: translateX(-50%) translateY(0);
     }
 
 
@@ -129,7 +145,7 @@
 </head>
 
 <body>
-  <div id="toast" class="toast">You have reached the limit of voice calls for today.</div>
+
   <div class="container">
     <div class="circle-wrapper">
       <div class="circle-ai w-embed w-iframe">
@@ -140,6 +156,7 @@
 
       <!-- Call UI displayed by default -->
       <div id="ai-call-container">
+        <div id="toast" class="toast">You have reached the limit of voice calls for today.</div>
         <span id="timer-display"></span>
         <button id="ai-call-button">
           <svg style="opacity: 1" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24"
